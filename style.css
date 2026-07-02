@@ -30,7 +30,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
 }
 
@@ -280,5 +280,138 @@ section {
     }
     .title {
         font-size: 4rem;
+    }
+}
+
+/* Background Grid Lines & Concentric Orbits */
+.background-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Render in front of body background but behind main text content */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.grid-line {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08); /* Increased opacity for clear visibility */
+}
+
+.grid-line.vertical {
+    top: 0;
+    right: 20%; /* 20% offset from right, matches editorial aesthetics */
+    width: 1px;
+    height: 100%;
+}
+
+.grid-line.horizontal {
+    bottom: 25%; /* 25% offset from bottom */
+    left: 0;
+    width: 100%;
+    height: 1px;
+}
+
+/* Concentric circular lines in the top right */
+.grid-circle {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.04); /* Increased opacity for circles */
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%); /* Centers the circles exactly at the top-right corner */
+}
+
+.grid-circle.circle-1 {
+    width: 50vw;
+    height: 50vw;
+    animation: orbit-anim-clock 25s linear infinite;
+}
+
+.grid-circle.circle-2 {
+    width: 75vw;
+    height: 75vw;
+    animation: orbit-anim-counter 40s linear infinite;
+}
+
+.grid-circle.circle-3 {
+    width: 100vw;
+    height: 100vw;
+    animation: orbit-anim-clock 55s linear infinite;
+}
+
+/* Orbit Pulses (concentric light dots) */
+.orbit-pulse {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Linear Line Pulses */
+.line-pulse-y {
+    position: absolute;
+    top: -150px;
+    left: 0;
+    width: 1px;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    animation: pulse-y-anim 8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.line-pulse-x {
+    position: absolute;
+    top: 0;
+    left: -150px;
+    width: 150px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    animation: pulse-x-anim 10s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    animation-delay: 2.5s; /* stagger starting times */
+}
+
+/* Animations for concentric circle orbits */
+@keyframes orbit-anim-clock {
+    from {
+        transform: translate(50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes orbit-anim-counter {
+    from {
+        transform: translate(50%, -50%) rotate(360deg);
+    }
+    to {
+        transform: translate(50%, -50%) rotate(0deg);
+    }
+}
+
+/* Animations for linear light pulses */
+@keyframes pulse-y-anim {
+    0% {
+        top: -150px;
+    }
+    45%, 100% {
+        top: 100%;
+    }
+}
+
+@keyframes pulse-x-anim {
+    0% {
+        left: -150px;
+    }
+    45%, 100% {
+        left: 100%;
     }
 }
