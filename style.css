@@ -500,3 +500,42 @@ section {
     border-color: rgba(255, 255, 255, 0.2);
     color: var(--text-primary);
 }
+
+/* Contact Social Links Styling */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+}
+
+.social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.social-icon-link svg {
+    transition: transform 0.3s ease;
+}
+
+.social-icon-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+.social-icon-link:hover svg {
+    transform: scale(1.1);
+}
