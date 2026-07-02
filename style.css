@@ -258,7 +258,7 @@ section {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.hero > *, .about-card, .stack-card {
+.hero > *, .about-card, .project-card, .stack-card {
     animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
 }
@@ -422,4 +422,81 @@ section {
     45%, 100% {
         left: 100%;
     }
+}
+
+/* Projects Section Styling */
+.projects-section {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project-card {
+    width: 100%;
+    max-width: 900px;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.project-link {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.project-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.project-desc {
+    margin-bottom: 3rem;
+}
+
+.project-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tech-tag {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.tech-tag:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
 }
