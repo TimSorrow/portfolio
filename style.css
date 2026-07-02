@@ -17,15 +17,14 @@
 
 html {
     background-color: #000000;
+    background: radial-gradient(circle at 50% 50%, #111111 0%, #000000 70%) no-repeat fixed;
 }
 
 body {
-    background-color: #000000;
+    background: transparent;
     color: var(--text-primary);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    /* Fixed radial gradient so it stays centered and doesn't run out during scroll */
-    background: radial-gradient(circle at 50% 50%, #111111 0%, #000000 70%) no-repeat fixed;
 }
 
 #canvas-container {
@@ -34,7 +33,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: -2; /* Safely placed behind grid lines (-1) */
     pointer-events: none;
 }
 
