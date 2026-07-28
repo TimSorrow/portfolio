@@ -107,14 +107,9 @@ main {
     width: 100vw;
     height: 100vh;
     display: block;
-    touch-action: none;
-    cursor: grab;
+    pointer-events: none;
     outline: none;
     z-index: 0;
-}
-
-#orbit:active {
-    cursor: grabbing;
 }
 
 .hero-content {
@@ -124,6 +119,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 1rem;
 }
 
 .readout {
@@ -352,11 +348,30 @@ section {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .glass-nav {
-        padding: 1.25rem;
+        padding: 1rem 1.5rem;
         justify-content: center;
     }
     .nav-links {
         display: none;
+    }
+    .hero {
+        padding-top: 5rem;
+    }
+    .subtitle {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        margin-bottom: 1.5rem;
+        max-width: 85vw;
+        line-height: 1.4;
+    }
+    .title {
+        font-size: clamp(2.4rem, 11vw, 4.2rem);
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
+    }
+    .hero-description {
+        font-size: 1rem;
+        max-width: 85vw;
     }
     .glass-card {
         padding: 3rem 2rem;
@@ -367,9 +382,6 @@ section {
     }
     main {
         padding: 0 8%;
-    }
-    .title {
-        font-size: 4rem;
     }
 }
 
