@@ -28,15 +28,6 @@ body {
     overflow-x: hidden;
 }
 
-#canvas-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2; /* Safely placed behind grid lines (-1) */
-    pointer-events: none;
-}
 
 /* Typography Base */
 h1, h2, h3, h4 {
@@ -110,6 +101,7 @@ main {
     pointer-events: none;
     outline: none;
     z-index: 0;
+    will-change: transform;
 }
 
 .hero-content {
