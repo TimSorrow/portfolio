@@ -584,10 +584,25 @@ function initOrbitObservatory() {
         draw(t);
     }
 
+    var heroSection = document.querySelector(".hero");
+    var heroVisible = true;
+    if (heroSection && window.IntersectionObserver) {
+        var observer = new IntersectionObserver(function (entries) {
+            heroVisible = entries[0].isIntersecting;
+            if (heroVisible) {
+                startRender();
+            } else {
+                cancelAnimationFrame(raf);
+                raf = 0;
+            }
+        }, { threshold: 0.02 });
+        observer.observe(heroSection);
+    }
+
     function startRender() {
         cancelAnimationFrame(raf);
         raf = 0;
-        if (!document.hidden && !reduced) raf = requestAnimationFrame(frame);
+        if (!document.hidden && !reduced && heroVisible) raf = requestAnimationFrame(frame);
         else draw(performance.now());
     }
 
