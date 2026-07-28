@@ -45,18 +45,18 @@ h1, h2, h3, h4 {
 
 .title {
     font-family: var(--font-serif);
-    font-size: clamp(3rem, 7vw, 7.5rem);
+    font-size: clamp(2.8rem, 7vw, 7.5rem);
     letter-spacing: -0.03em;
     line-height: 1;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     text-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
 .subtitle, .section-label, .nav-links a, h4 {
     font-family: var(--font-sans);
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
     font-weight: 500;
     color: var(--text-secondary);
 }
@@ -119,7 +119,9 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 1rem;
+    gap: 0.35rem;
+    padding: 0 1.5rem;
+    text-align: center;
 }
 
 .readout {
@@ -355,23 +357,24 @@ section {
         display: none;
     }
     .hero {
-        padding-top: 5rem;
+        padding-top: 4rem;
     }
     .subtitle {
-        font-size: 0.7rem;
-        letter-spacing: 0.15em;
-        margin-bottom: 1.5rem;
-        max-width: 85vw;
-        line-height: 1.4;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        margin: 0;
+        max-width: 70vw;
+        line-height: 1.3;
     }
     .title {
-        font-size: clamp(2.4rem, 11vw, 4.2rem);
+        font-size: clamp(2.2rem, 10vw, 3.8rem);
         letter-spacing: -0.02em;
-        margin-bottom: 1.25rem;
+        margin: 0;
     }
     .hero-description {
-        font-size: 1rem;
-        max-width: 85vw;
+        font-size: 0.9rem;
+        max-width: 70vw;
+        margin: 0;
     }
     .glass-card {
         padding: 3rem 2rem;
