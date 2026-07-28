@@ -14,13 +14,17 @@ function initOrbitObservatory() {
 
     var motion = matchMedia("(prefers-reduced-motion: reduce)");
     var reduced = motion.matches;
-    var W = 1, H = 1, DPR = 1, raf = 0;
+    var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    var TARGET_FPS = isMobile ? 30 : 60;
+    var FRAME_MS = 1000 / TARGET_FPS;
+    var lastFrameTime = 0;
+    var W = 1, H = 1, DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2), raf = 0;
     var yaw = -0.38, pitch = 0.22, targetYaw = yaw, targetPitch = pitch;
     var auto = !reduced;
     var lastMinute = "", clockStamp = "--:--:--";
     var pointer = { down: false, x: 0, y: 0, id: null };
     var TAU = Math.PI * 2;
-    var stars = [], dust = [], sparks = [], streamers = [];
+    var stars = [], dust = [], sparks = [], streamers = [], sortedStars = [];
 
     function pad(n) { return n < 10 ? "0" + n : String(n); }
     function seeded(i) {
@@ -29,11 +33,12 @@ function initOrbitObservatory() {
     }
 
     function rebuildField() {
-        stars = []; dust = []; sparks = []; streamers = [];
+        stars = []; dust = []; sparks = []; streamers = []; sortedStars = [];
         var i, u, v, r, a, z, q;
 
-        /* Optimized dense star field */
-        for (i = 0; i < 750; i += 1) {
+        /* Optimised star count: fewer on mobile for smooth 30fps */
+        var starCount = isMobile ? 420 : 750;
+        for (i = 0; i < starCount; i += 1) {
             u = seeded(i * 4);
             v = seeded(i * 4 + 1);
             r = 3 + seeded(i * 4 + 2) * 26;
@@ -417,7 +422,9 @@ function initOrbitObservatory() {
         ctx.fillRect(0, 0, W, H);
         ctx.restore();
 
-        stars.slice().sort(function (a, b) { return a.z - b.z; }).forEach(function (star) {
+        // Use pre-sorted cache instead of sorting every frame
+        if (!sortedStars.length) sortedStars = stars.slice().sort(function (a, b) { return a.z - b.z; });
+        sortedStars.forEach(function (star) {
             var p = project(star.x, star.y, star.z);
             var dx = p.x - cx, dy = p.y - cy;
             var d = Math.hypot(dx, dy);
@@ -567,11 +574,14 @@ function initOrbitObservatory() {
     }
 
     function frame(t) {
+        raf = requestAnimationFrame(frame);
+        // Throttle to TARGET_FPS to free main thread for interactions (INP fix)
+        if (t - lastFrameTime < FRAME_MS) return;
+        lastFrameTime = t;
         if (auto) targetYaw += 0.0012;
         yaw += (targetYaw - yaw) * 0.09;
         pitch += (targetPitch - pitch) * 0.09;
         draw(t);
-        raf = requestAnimationFrame(frame);
     }
 
     function startRender() {
@@ -678,10 +688,19 @@ function initOrbitObservatory() {
     startRender();
 }
 
+// Defer canvas init so the page text paints first (LCP fix)
+function scheduleInit() {
+    if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(initOrbitObservatory, { timeout: 1500 });
+    } else {
+        setTimeout(initOrbitObservatory, 200);
+    }
+}
+
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initOrbitObservatory);
+    document.addEventListener("DOMContentLoaded", scheduleInit);
 } else {
-    initOrbitObservatory();
+    scheduleInit();
 }
 
 // Projects Slider Logic
