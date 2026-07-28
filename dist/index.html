@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <title>AI Engineer & Creative Developer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script type="module" crossorigin src="/assets/index-BQQCwpJu.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DBseQsG8.css">
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="background-grid">
+        <div class="grid-line vertical">
+            <div class="line-pulse-y"></div>
+        </div>
+        <div class="grid-line horizontal">
+            <div class="line-pulse-x"></div>
+        </div>
+        <div class="grid-circle circle-1">
+            <div class="orbit-pulse"></div>
+        </div>
+        <div class="grid-circle circle-2">
+            <div class="orbit-pulse"></div>
+        </div>
+        <div class="grid-circle circle-3">
+            <div class="orbit-pulse"></div>
+        </div>
+    </div>
+
+    <nav class="glass-nav">
+        <div class="logo">T/S</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#stack">Tech Stack</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <canvas id="orbit" tabindex="0" role="img" aria-label="Event Horizon Orbit is loading local time."></canvas>
+            <div class="readout" aria-hidden="true">
+                <time id="display" class="time">--:--:--</time>
+                <p class="legend">
+                    <span class="h"><i></i>hour</span>
+                    <span class="m"><i></i>minute</span>
+                    <span class="s"><i></i>second</span>
+                </p>
+            </div>
+            <div class="hero-content">
+                <h2 class="subtitle">AI Engineer & Creative Developer</h2>
+                <h1 class="title">TIMUR SUROV</h1>
+                <p class="hero-description">The material has to be created</p>
+            </div>
+            <p id="status" class="sr-only" aria-live="polite">Loading local time.</p>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="glass-card about-card">
+                <p class="section-label">01 // About</p>
+                <h3 class="card-title">Architecting Systems</h3>
+                <p class="card-text">
+                    I specialize in designing and implementing sophisticated artificial intelligence models
+                    and creating visually stunning, interactive digital experiences. My work bridges the gap
+                    between complex data structures and human-centric design, resulting in solutions that
+                    are both powerful and elegant.
+                </p>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <div class="glass-card project-card">
+                <p class="section-label">02 // Selected Work</p>
+                
+                <div class="project-slider">
+                    <div class="project-slides">
+                        <!-- Project 1: Semantic Caching Layer -->
+                        <div class="project-slide active" data-index="0">
+                            <div class="project-header">
+                                <h3 class="card-title">Semantic Caching Layer</h3>
+                                <a href="https://semantic-cache-api-74171843573.us-central1.run.app/" target="_blank" class="project-link">
+                                    Live Demo ↗
+                                </a>
+                            </div>
+                            <p class="card-text project-desc">
+                                An advanced semantic caching layer designed for LLMs, featuring vector similarity search 
+                                with Redis HNSW index and real-time visualization of query pipeline execution. Reduces latency 
+                                and API costs by matching semantically equivalent queries using embeddings.
+                            </p>
+                            <div class="project-tech-tags">
+                                <span class="tech-tag">Redis VSS</span>
+                                <span class="tech-tag">Vector Embeddings</span>
+                                <span class="tech-tag">Llama 3.2 / Ollama</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Vite / HTML5</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Project 2: Text-to-SQL with Guardrails MVP -->
+                        <div class="project-slide" data-index="1">
+                            <div class="project-header">
+                                <h3 class="card-title">Text-to-SQL with Guardrails</h3>
+                                <a href="https://github.com/TimSorrow/Text-to-SQL-with-Guardrails-MVP" target="_blank" class="project-link">
+                                    GitHub Repo ↗
+                                </a>
+                            </div>
+                            <p class="card-text project-desc">
+                                A robust MVP translating natural language queries to secure SQL. Implements comprehensive 
+                                safety guardrails to prevent SQL injection, restrict unauthorized schema access, and validate 
+                                generated queries before execution, bridging the gap between natural language interfaces and database security.
+                            </p>
+                            <div class="project-tech-tags">
+                                <span class="tech-tag">Text-to-SQL</span>
+                                <span class="tech-tag">Guardrails</span>
+                                <span class="tech-tag">SQL Security</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">LLM Agents</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: Documentation Web Crawler -->
+                        <div class="project-slide" data-index="2">
+                            <div class="project-header">
+                                <h3 class="card-title">Documentation Web Crawler</h3>
+                                <a href="https://github.com/TimSorrow/Documentation-Web-Crawler" target="_blank" class="project-link">
+                                    GitHub Repo ↗
+                                </a>
+                            </div>
+                            <p class="card-text project-desc">
+                                A high-performance, multi-threaded web crawler designed to scrape and compile complex technical documentation. 
+                                Automatically manages rate limits, parses page hierarchies, and outputs clean formats (like Markdown or JSON) 
+                                optimized for RAG pipelines and LLM training.
+                            </p>
+                            <div class="project-tech-tags">
+                                <span class="tech-tag">Web Scraper</span>
+                                <span class="tech-tag">Documentation</span>
+                                <span class="tech-tag">RAG Pipelines</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">BeautifulSoup</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: Sequence & Risk ML Portfolio -->
+                        <div class="project-slide" data-index="3">
+                            <div class="project-header">
+                                <h3 class="card-title">Sequence & Risk ML</h3>
+                                <a href="https://github.com/TimSorrow/ai-machine-projects" target="_blank" class="project-link">
+                                    GitHub Repo ↗
+                                </a>
+                            </div>
+                            <p class="card-text project-desc">
+                                A collection of deep learning architectures in PyTorch for financial data: Contrastive Sequence Pre-training (CoLES) 
+                                on transaction streams, SASRec event Transformers for LTV forecasting, and a Multimodal Risk Fusion model 
+                                combining event sequences, tabular data, and merchant graphs for fraud detection.
+                            </p>
+                            <div class="project-tech-tags">
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Sequence Modeling</span>
+                                <span class="tech-tag">Fraud Detection</span>
+                                <span class="tech-tag">LTV Forecasting</span>
+                                <span class="tech-tag">Graph ML</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slider Navigation Controls -->
+                    <div class="slider-controls">
+                        <button class="slider-arrow prev" aria-label="Previous Project">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                        <div class="slider-dots">
+                            <span class="slider-dot active" data-index="0"></span>
+                            <span class="slider-dot" data-index="1"></span>
+                            <span class="slider-dot" data-index="2"></span>
+                            <span class="slider-dot" data-index="3"></span>
+                        </div>
+                        <button class="slider-arrow next" aria-label="Next Project">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="stack-section">
+            <p class="section-label text-center">03 // Tech Stack</p>
+            <div class="stack-grid">
+                <div class="glass-card stack-card">
+                    <h4>Machine Learning</h4>
+                    <ul>
+                        <li>TensorFlow</li>
+                        <li>PyTorch</li>
+                        <li>LLMs & NLP</li>
+                    </ul>
+                </div>
+                <div class="glass-card stack-card">
+                    <h4>Creative Dev</h4>
+                    <ul>
+                        <li>Three.js</li>
+                        <li>WebGL</li>
+                        <li>Creative Coding</li>
+                    </ul>
+                </div>
+                <div class="glass-card stack-card">
+                    <h4>Engineering</h4>
+                    <ul>
+                        <li>Python</li>
+                        <li>TypeScript</li>
+                        <li>Cloud Architecture</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="glass-card contact-card text-center">
+                <p class="section-label">04 // Contact</p>
+                <h3 class="card-title">Let's build together</h3>
+                <a href="mailto:tisu@duck.com" class="cta-button">Initiate Connection</a>
+                
+                <div class="social-links">
+                    <a href="https://github.com/TimSorrow" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/timursurov/?locale=en" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                    </a>
+                    <a href="mailto:tisu@duck.com" class="social-icon-link" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>
