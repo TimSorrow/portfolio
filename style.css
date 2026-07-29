@@ -2,8 +2,8 @@
     --bg-color: #000000;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.65);
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --glass-bg: rgba(10, 10, 18, 0.78);
     --glass-border: rgba(255, 255, 255, 0.12);
 }
@@ -325,20 +325,20 @@ section {
     transform: scale(1.05);
 }
 
-/* Initial Load Animations */
+/* Initial Load Animations - Optimized for instant LCP and 0 CLS */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0.8; }
+    to { opacity: 1; }
 }
 
-.hero > *, .about-card, .project-card, .stack-card {
-    animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
+.about-card, .project-card, .stack-card {
+    animation: fadeIn 0.6s ease-out forwards;
 }
 
-.hero .subtitle { animation-delay: 0.2s; }
-.hero .title { animation-delay: 0.4s; }
-.hero .hero-description { animation-delay: 0.6s; }
+.hero-content {
+    opacity: 1;
+    transform: none;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -457,23 +457,25 @@ section {
 /* Linear Line Pulses */
 .line-pulse-y {
     position: absolute;
-    top: -150px;
+    top: 0;
     left: 0;
     width: 1px;
     height: 150px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
     animation: pulse-y-anim 8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+    will-change: transform;
 }
 
 .line-pulse-x {
     position: absolute;
     top: 0;
-    left: -150px;
+    left: 0;
     width: 150px;
     height: 1px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
     animation: pulse-x-anim 10s cubic-bezier(0.25, 1, 0.5, 1) infinite;
     animation-delay: 2.5s; /* stagger starting times */
+    will-change: transform;
 }
 
 /* Animations for concentric circle orbits */
@@ -498,19 +500,19 @@ section {
 /* Animations for linear light pulses */
 @keyframes pulse-y-anim {
     0% {
-        top: -150px;
+        transform: translateY(-150px);
     }
     45%, 100% {
-        top: 100%;
+        transform: translateY(100vh);
     }
 }
 
 @keyframes pulse-x-anim {
     0% {
-        left: -150px;
+        transform: translateX(-150px);
     }
     45%, 100% {
-        left: 100%;
+        transform: translateX(100vw);
     }
 }
 

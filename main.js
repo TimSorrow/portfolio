@@ -609,23 +609,19 @@ function initOrbitObservatory() {
     resize();
     draw(performance.now());
 
-    var isLighthouse = /HeadlessChromium|Lighthouse|Chrome-Lighthouse/i.test(navigator.userAgent);
-    
-    if (!isLighthouse) {
-        // Start smooth 60fps animation after initial render paint
-        var animStarted = false;
-        function triggerAnimation() {
-            if (animStarted) return;
-            animStarted = true;
-            startRender();
-        }
-
-        window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });
-        window.addEventListener("touchstart", triggerAnimation, { passive: true, once: true });
-        window.addEventListener("scroll", triggerAnimation, { passive: true, once: true });
-
-        setTimeout(triggerAnimation, 800);
+    var animStarted = false;
+    function triggerAnimation() {
+        if (animStarted) return;
+        animStarted = true;
+        startRender();
     }
+
+    window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });
+    window.addEventListener("touchstart", triggerAnimation, { passive: true, once: true });
+    window.addEventListener("scroll", triggerAnimation, { passive: true, once: true });
+
+    // Fallback: start animation after main-thread idle time (4s)
+    setTimeout(triggerAnimation, 4000);
 }
 
 // Defer canvas init so the page text paints first (LCP fix)
