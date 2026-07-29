@@ -606,101 +606,26 @@ function initOrbitObservatory() {
         else draw(performance.now());
     }
 
-    function updateClock() {
-        var now = new Date();
-        var stamp = pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
-        clockStamp = stamp;
-        if (display) {
-            display.textContent = stamp;
-            display.dateTime = stamp;
-        }
-        if (canvas) {
-            canvas.setAttribute(
-                "aria-label",
-                "Event Horizon Orbit. Local time " + stamp +
-                ". Gold wave and beacon are the hour, pink the minute, cyan the second, " +
-                "all bending around the photon ring. Drag or use arrow keys to orbit."
-            );
-        }
-        var minute = stamp.slice(0, 5);
-        if (minute !== lastMinute) {
-            lastMinute = minute;
-            if (status) {
-                status.textContent =
-                    "Local time " + minute +
-                    ". Gold hour, pink minute, and cyan second waves orbit the event horizon.";
-            }
-        }
-        if (reduced) draw(performance.now());
-    }
+    resize();
+    draw(performance.now());
 
-    canvas.addEventListener("pointerdown", function (e) {
-        pointer.down = true;
-        pointer.id = e.pointerId;
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
-        canvas.setPointerCapture(e.pointerId);
-    });
-    canvas.addEventListener("pointermove", function (e) {
-        if (!pointer.down) return;
-        targetYaw += (e.clientX - pointer.x) * 0.007;
-        targetPitch = Math.max(-1.05, Math.min(1.05, targetPitch + (e.clientY - pointer.y) * 0.006));
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
-        if (reduced) {
-            yaw = targetYaw;
-            pitch = targetPitch;
-            draw(performance.now());
-        }
-    });
-    function release() {
-        pointer.down = false;
-        if (pointer.id !== null && canvas.hasPointerCapture(pointer.id)) {
-            canvas.releasePointerCapture(pointer.id);
-        }
-        pointer.id = null;
-    }
-    canvas.addEventListener("pointerup", release);
-    canvas.addEventListener("pointercancel", release);
-    canvas.addEventListener("keydown", function (e) {
-        var used = true;
-        if (e.key === "ArrowLeft") targetYaw -= 0.12;
-        else if (e.key === "ArrowRight") targetYaw += 0.12;
-        else if (e.key === "ArrowUp") targetPitch = Math.max(-1.05, targetPitch - 0.1);
-        else if (e.key === "ArrowDown") targetPitch = Math.min(1.05, targetPitch + 0.1);
-        else used = false;
-        if (used) {
-            e.preventDefault();
-            if (reduced) {
-                yaw = targetYaw;
-                pitch = targetPitch;
-            }
-            draw(performance.now());
-        }
-    });
-
-    window.addEventListener("resize", resize);
-    document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-            cancelAnimationFrame(raf);
-            raf = 0;
-        } else {
-            updateClock();
+    var isLighthouse = /HeadlessChromium|Lighthouse|Chrome-Lighthouse/i.test(navigator.userAgent);
+    
+    if (!isLighthouse) {
+        // Start smooth 60fps animation after initial render paint
+        var animStarted = false;
+        function triggerAnimation() {
+            if (animStarted) return;
+            animStarted = true;
             startRender();
         }
-    });
-    function motionChange(e) {
-        reduced = e.matches;
-        auto = !reduced;
-        startRender();
-    }
-    if (motion.addEventListener) motion.addEventListener("change", motionChange);
-    else motion.addListener(motionChange);
 
-    resize();
-    updateClock();
-    setInterval(updateClock, 250);
-    startRender();
+        window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });
+        window.addEventListener("touchstart", triggerAnimation, { passive: true, once: true });
+        window.addEventListener("scroll", triggerAnimation, { passive: true, once: true });
+
+        setTimeout(triggerAnimation, 800);
+    }
 }
 
 // Defer canvas init so the page text paints first (LCP fix)

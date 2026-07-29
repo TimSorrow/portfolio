@@ -41,8 +41,9 @@
         .glass-nav{position:fixed;top:2rem;left:50%;transform:translateX(-50%);width:90%;max-width:800px;padding:1.25rem 2.5rem;background:rgba(10,10,18,.78);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:100px;z-index:100;display:flex;justify-content:space-between;align-items:center}
     </style>
 
-    <!-- Full CSS (non-blocking after critical) -->
-    <link rel="stylesheet" href="./style.css">
+    <!-- Full CSS (non-blocking) -->
+    <link rel="preload" href="./style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./style.css"></noscript>
 
     <!-- Vercel Web Analytics -->
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
