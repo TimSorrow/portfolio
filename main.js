@@ -586,10 +586,11 @@ function initOrbitObservatory() {
 
     var heroSection = document.querySelector(".hero");
     var heroVisible = true;
+    var animStarted = false;
     if (heroSection && window.IntersectionObserver) {
         var observer = new IntersectionObserver(function (entries) {
             heroVisible = entries[0].isIntersecting;
-            if (heroVisible) {
+            if (heroVisible && animStarted) {
                 startRender();
             } else {
                 cancelAnimationFrame(raf);
@@ -609,11 +610,10 @@ function initOrbitObservatory() {
     resize();
     draw(performance.now());
 
-    var animStarted = false;
     function triggerAnimation() {
         if (animStarted) return;
         animStarted = true;
-        startRender();
+        if (heroVisible) startRender();
     }
 
     window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });
