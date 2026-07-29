@@ -619,9 +619,7 @@ function initOrbitObservatory() {
     window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });
     window.addEventListener("touchstart", triggerAnimation, { passive: true, once: true });
     window.addEventListener("scroll", triggerAnimation, { passive: true, once: true });
-
-    // Fallback: start animation after main-thread idle time (4s)
-    setTimeout(triggerAnimation, 4000);
+    window.addEventListener("mousemove", triggerAnimation, { passive: true, once: true });
 }
 
 // Defer canvas init so the page text paints first (LCP fix)
