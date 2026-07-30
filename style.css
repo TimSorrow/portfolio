@@ -325,6 +325,13 @@ section {
     transform: scale(1.05);
 }
 
+.hero-cta {
+    pointer-events: auto;
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    font-size: 0.75rem;
+}
+
 /* Initial Load Animations - Optimized for instant LCP and 0 CLS */
 @keyframes fadeIn {
     from { opacity: 0.8; }
