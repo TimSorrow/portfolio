@@ -532,14 +532,10 @@ function initOrbitObservatory() {
 
         drawDiskParticles(cx, cy, hole, t, tilt, rotation);
 
-        var date = new Date();
-        var ms = reduced ? 0 : date.getMilliseconds();
-        var secF = date.getSeconds() + ms / 1000;
-        var minF = date.getMinutes() + secF / 60;
-        var hourF = (date.getHours() % 12) + minF / 60;
-        var second = secF / 60 * TAU - Math.PI / 2;
-        var minute = minF / 60 * TAU - Math.PI / 2;
-        var hour = hourF / 12 * TAU - Math.PI / 2;
+        var timePhase = reduced ? 0 : t * 0.0003;
+        var second = timePhase * 2 - Math.PI / 2;
+        var minute = timePhase - Math.PI / 2;
+        var hour = timePhase * 0.5 - Math.PI / 2;
         var lensTurn = yaw * 0.12;
 
         drawHourTicks(cx, cy, hole, lensTurn);

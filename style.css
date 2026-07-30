@@ -118,57 +118,6 @@ main {
     text-align: center;
 }
 
-.readout {
-    position: absolute;
-    z-index: 4;
-    left: max(24px, env(safe-area-inset-left));
-    top: max(24px, env(safe-area-inset-top));
-    padding: 10px 14px 10px 12px;
-    border-left: 2px solid rgba(121, 231, 255, 0.55);
-    pointer-events: none;
-    text-shadow: 0 2px 12px #000;
-    background: linear-gradient(90deg, rgba(8, 8, 24, 0.75), transparent);
-    border-radius: 4px;
-}
-
-.time {
-    display: block;
-    color: rgba(247, 241, 255, 0.88);
-    font-size: clamp(15px, 1.9vw, 22px);
-    line-height: 1;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    font-variant-numeric: tabular-nums;
-}
-
-.legend {
-    display: flex;
-    gap: 0.85rem;
-    margin-top: 7px;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(247, 241, 255, 0.42);
-}
-
-.legend span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
-.legend i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    box-shadow: 0 0 8px currentColor;
-    background: currentColor;
-}
-
-.legend .h { color: #ffb35c; }
-.legend .m { color: #ff4fc8; }
-.legend .s { color: #79e7ff; }
-
 .sr-only {
     position: absolute;
     width: 1px;
