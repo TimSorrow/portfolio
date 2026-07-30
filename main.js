@@ -19,6 +19,8 @@ function initOrbitObservatory() {
     var FRAME_MS = 1000 / TARGET_FPS;
     var lastFrameTime = 0;
     var W = 1, H = 1, DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2), raf = 0;
+    var cx, cy, unit, hole;
+    var bgGrad, n1Grad, n2Grad, n3Grad, shadowGrad, photonGrad, warpGrad;
     var yaw = -0.38, pitch = 0.22, targetYaw = yaw, targetPitch = pitch;
     var auto = !reduced;
     var lastMinute = "", clockStamp = "--:--:--";
@@ -37,7 +39,7 @@ function initOrbitObservatory() {
         var i, u, v, r, a, z, q;
 
         /* Optimised star count: fewer on mobile for smooth 30fps */
-        var starCount = isMobile ? 420 : 750;
+        var starCount = isMobile ? 180 : 750;
         for (i = 0; i < starCount; i += 1) {
             u = seeded(i * 4);
             v = seeded(i * 4 + 1);
@@ -56,7 +58,8 @@ function initOrbitObservatory() {
         }
 
         /* Accretion / halo dust particles */
-        for (i = 0; i < 420; i += 1) {
+        var dustCount = isMobile ? 120 : 420;
+        for (i = 0; i < dustCount; i += 1) {
             dust.push({
                 phase: seeded(i * 3) * TAU,
                 radius: 1.15 + seeded(i * 3 + 1) * 2.35,
@@ -68,7 +71,8 @@ function initOrbitObservatory() {
         }
 
         /* Fast inner sparks */
-        for (i = 0; i < 180; i += 1) {
+        var sparkCount = isMobile ? 60 : 180;
+        for (i = 0; i < sparkCount; i += 1) {
             sparks.push({
                 phase: seeded(i * 6 + 1) * TAU,
                 radius: 1.05 + seeded(i * 6 + 2) * 0.55,
@@ -79,7 +83,8 @@ function initOrbitObservatory() {
         }
 
         /* Long colorful streamer seeds for ambient jets */
-        for (i = 0; i < 24; i += 1) {
+        var streamerCount = isMobile ? 12 : 24;
+        for (i = 0; i < streamerCount; i += 1) {
             streamers.push({
                 phase: seeded(i * 17) * TAU,
                 length: 0.35 + seeded(i * 17 + 1) * 1.1,
@@ -97,6 +102,54 @@ function initOrbitObservatory() {
         canvas.width = Math.round(W * DPR);
         canvas.height = Math.round(H * DPR);
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+        cx = W / 2;
+        cy = H / 2;
+        unit = Math.min(W, H);
+        hole = unit * 0.36;
+
+        bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.75);
+        bgGrad.addColorStop(0, "#2a1450");
+        bgGrad.addColorStop(0.14, "#141a48");
+        bgGrad.addColorStop(0.36, "#0a0c28");
+        bgGrad.addColorStop(0.62, "#050612");
+        bgGrad.addColorStop(1, "#010107");
+
+        n1Grad = ctx.createRadialGradient(cx - hole * 2.8, cy - hole * 0.8, 0, cx - hole * 2.8, cy - hole * 0.8, unit * 0.62);
+        n1Grad.addColorStop(0, "rgba(255,48,183,0.2)");
+        n1Grad.addColorStop(0.4, "rgba(90,70,255,0.1)");
+        n1Grad.addColorStop(1, "rgba(0,0,0,0)");
+
+        n2Grad = ctx.createRadialGradient(cx + hole * 2.4, cy + hole * 1.1, 0, cx + hole * 2.4, cy + hole * 1.1, unit * 0.5);
+        n2Grad.addColorStop(0, "rgba(80,220,255,0.12)");
+        n2Grad.addColorStop(0.45, "rgba(120,255,160,0.05)");
+        n2Grad.addColorStop(1, "rgba(0,0,0,0)");
+
+        n3Grad = ctx.createRadialGradient(cx + hole * 0.5, cy - hole * 2.2, 0, cx + hole * 0.5, cy - hole * 2.2, unit * 0.4);
+        n3Grad.addColorStop(0, "rgba(255,180,80,0.1)");
+        n3Grad.addColorStop(1, "rgba(0,0,0,0)");
+
+        shadowGrad = ctx.createRadialGradient(cx - hole * 0.2, cy - hole * 0.18, hole * 0.08, cx, cy, hole);
+        shadowGrad.addColorStop(0, "#000");
+        shadowGrad.addColorStop(0.68, "#000");
+        shadowGrad.addColorStop(0.9, "#020108");
+        shadowGrad.addColorStop(1, "rgba(0,0,0,0.82)");
+
+        photonGrad = ctx.createLinearGradient(cx - hole * 1.3, cy, cx + hole * 1.3, cy);
+        photonGrad.addColorStop(0, "#ff4fc8");
+        photonGrad.addColorStop(0.25, "#ffb35c");
+        photonGrad.addColorStop(0.5, "#79e7ff");
+        photonGrad.addColorStop(0.75, "#b7ff72");
+        photonGrad.addColorStop(1, "#8d6bff");
+
+        warpGrad = ctx.createRadialGradient(cx, cy, hole * 0.92, cx, cy, hole * 2.85);
+        warpGrad.addColorStop(0, "rgba(255,200,255,0)");
+        warpGrad.addColorStop(0.18, "rgba(255,120,200,0.1)");
+        warpGrad.addColorStop(0.32, "rgba(120,220,255,0.14)");
+        warpGrad.addColorStop(0.48, "rgba(255,180,90,0.08)");
+        warpGrad.addColorStop(0.7, "rgba(140,100,255,0.083)");
+        warpGrad.addColorStop(1, "rgba(0,0,0,0)");
+
         rebuildField();
         draw(performance.now());
     }
@@ -237,17 +290,12 @@ function initOrbitObservatory() {
         ctx.save();
         ctx.globalCompositeOperation = "lighter";
         var pulse = reduced ? 0.55 : 0.48 + 0.12 * Math.sin(t * 0.0008);
-        var warp = ctx.createRadialGradient(cx, cy, hole * 0.92, cx, cy, hole * 2.85);
-        warp.addColorStop(0, "rgba(255,200,255,0)");
-        warp.addColorStop(0.18, "rgba(255,120,200," + (0.1 * pulse) + ")");
-        warp.addColorStop(0.32, "rgba(120,220,255," + (0.14 * pulse) + ")");
-        warp.addColorStop(0.48, "rgba(255,180,90," + (0.08 * pulse) + ")");
-        warp.addColorStop(0.7, "rgba(140,100,255,0.04)");
-        warp.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = warp;
+        ctx.globalAlpha = pulse;
+        ctx.fillStyle = warpGrad;
         ctx.beginPath();
         ctx.arc(cx, cy, hole * 2.85, 0, TAU);
         ctx.fill();
+        ctx.globalAlpha = 1;
 
         var rings = [
             { r: 1.32, a: 0.22, w: 2.4, c: "rgba(121,231,255," },
@@ -388,37 +436,17 @@ function initOrbitObservatory() {
     function draw(t) {
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
         ctx.clearRect(0, 0, W, H);
-        var cx = W / 2, cy = H / 2;
-        var unit = Math.min(W, H);
-        var hole = unit * 0.36;
-
-        var bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.75);
-        bg.addColorStop(0, "#2a1450");
-        bg.addColorStop(0.14, "#141a48");
-        bg.addColorStop(0.36, "#0a0c28");
-        bg.addColorStop(0.62, "#050612");
-        bg.addColorStop(1, "#010107");
-        ctx.fillStyle = bg;
+        
+        ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, W, H);
 
         ctx.save();
         ctx.globalCompositeOperation = "screen";
-        var n1 = ctx.createRadialGradient(cx - hole * 2.8, cy - hole * 0.8, 0, cx - hole * 2.8, cy - hole * 0.8, unit * 0.62);
-        n1.addColorStop(0, "rgba(255,48,183,0.2)");
-        n1.addColorStop(0.4, "rgba(90,70,255,0.1)");
-        n1.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = n1;
+        ctx.fillStyle = n1Grad;
         ctx.fillRect(0, 0, W, H);
-        var n2 = ctx.createRadialGradient(cx + hole * 2.4, cy + hole * 1.1, 0, cx + hole * 2.4, cy + hole * 1.1, unit * 0.5);
-        n2.addColorStop(0, "rgba(80,220,255,0.12)");
-        n2.addColorStop(0.45, "rgba(120,255,160,0.05)");
-        n2.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = n2;
+        ctx.fillStyle = n2Grad;
         ctx.fillRect(0, 0, W, H);
-        var n3 = ctx.createRadialGradient(cx + hole * 0.5, cy - hole * 2.2, 0, cx + hole * 0.5, cy - hole * 2.2, unit * 0.4);
-        n3.addColorStop(0, "rgba(255,180,80,0.1)");
-        n3.addColorStop(1, "rgba(0,0,0,0)");
-        ctx.fillStyle = n3;
+        ctx.fillStyle = n3Grad;
         ctx.fillRect(0, 0, W, H);
         ctx.restore();
 
@@ -541,23 +569,12 @@ function initOrbitObservatory() {
         ellipse(cx, cy, hole * 1.055, hole * (0.43 + tilt * 0.32), rotation, "rgba(121,231,255,0.75)", 1.1, 10);
         ellipse(cx, cy, hole * 1.28, hole * (0.52 + tilt * 0.3), rotation, "rgba(140,255,160,0.12)", 1, 6);
 
-        var shadow = ctx.createRadialGradient(cx - hole * 0.2, cy - hole * 0.18, hole * 0.08, cx, cy, hole);
-        shadow.addColorStop(0, "#000");
-        shadow.addColorStop(0.68, "#000");
-        shadow.addColorStop(0.9, "#020108");
-        shadow.addColorStop(1, "rgba(0,0,0,0.82)");
-        ctx.fillStyle = shadow;
+        ctx.fillStyle = shadowGrad;
         ctx.beginPath();
         ctx.arc(cx, cy, hole, 0, TAU);
         ctx.fill();
 
-        var photon = ctx.createLinearGradient(cx - hole * 1.3, cy, cx + hole * 1.3, cy);
-        photon.addColorStop(0, "#ff4fc8");
-        photon.addColorStop(0.25, "#ffb35c");
-        photon.addColorStop(0.5, "#79e7ff");
-        photon.addColorStop(0.75, "#b7ff72");
-        photon.addColorStop(1, "#8d6bff");
-        ctx.strokeStyle = photon;
+        ctx.strokeStyle = photonGrad;
         ctx.shadowColor = "#79e7ff";
         ctx.shadowBlur = 22;
         ctx.lineWidth = 2.4;
