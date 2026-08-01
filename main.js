@@ -38,8 +38,8 @@ function initOrbitObservatory() {
         stars = []; dust = []; sparks = []; streamers = []; sortedStars = [];
         var i, u, v, r, a, z, q;
 
-        /* Optimised star count: fewer on mobile for smooth 30fps */
-        var starCount = isMobile ? 180 : 750;
+        /* Optimised star count for sub-5ms render pipeline */
+        var starCount = isMobile ? 160 : 320;
         for (i = 0; i < starCount; i += 1) {
             u = seeded(i * 4);
             v = seeded(i * 4 + 1);
@@ -511,22 +511,22 @@ function initOrbitObservatory() {
         var tilt = 0.29 + Math.abs(Math.sin(pitch)) * 0.28;
         var rotation = yaw * 0.22;
 
+        // Fast 24-band accretion disk rendering (0ms transform reset lag)
         ctx.save();
         ctx.globalCompositeOperation = "lighter";
-        for (var band = 0; band < 64; band += 1) {
-            var q = band / 63;
+        ctx.translate(cx, cy);
+        ctx.rotate(rotation);
+        ctx.scale(1, tilt);
+        for (var band = 0; band < 24; band += 1) {
+            var q = band / 23;
             var r = hole * (1.16 + q * 2.2);
             var phase = (reduced ? 0 : t * 0.00012) * (1.3 - q * 0.7) + band * 0.61;
-            var hue = (300 + band * 5.5 + Math.sin(yaw + band * 0.1) * 36 + t * 0.01) % 360;
-            ctx.strokeStyle = "hsla(" + hue + ",96%," + (52 + q * 22) + "%," + (0.04 + (1 - q) * 0.16) + ")";
-            ctx.lineWidth = 1 + (1 - q) * 5.5;
-            ctx.translate(cx, cy);
-            ctx.rotate(rotation);
-            ctx.scale(1, tilt);
+            var hue = (300 + band * 14 + Math.sin(yaw + band * 0.2) * 36 + t * 0.01) % 360;
+            ctx.strokeStyle = "hsla(" + hue + ",96%," + (52 + q * 22) + "%," + (0.05 + (1 - q) * 0.18) + ")";
+            ctx.lineWidth = 1.2 + (1 - q) * 5.5;
             ctx.beginPath();
             ctx.arc(0, 0, r, phase, phase + 0.7 + seeded(band) * 2.6);
             ctx.stroke();
-            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
         }
         ctx.restore();
 
@@ -537,8 +537,6 @@ function initOrbitObservatory() {
         var minute = timePhase - Math.PI / 2;
         var hour = timePhase * 0.5 - Math.PI / 2;
         var lensTurn = yaw * 0.12;
-
-        drawHourTicks(cx, cy, hole, lensTurn);
 
         var hAng = hour + lensTurn;
         var mAng = minute + lensTurn;
@@ -551,9 +549,9 @@ function initOrbitObservatory() {
         lensArc(cx, cy, hole, mAng, "#ff4fc8", hole * 0.078, 0.62, 0.98, 1.05);
         lensArc(cx, cy, hole, sAng, "#79e7ff", hole * 0.028, 0.3, 0.72, 0.72);
 
-        waveParticles(cx, cy, hole, hAng, "rgba(255,220,120,ALPHA)", 34, 0.82, t, 11);
-        waveParticles(cx, cy, hole, mAng, "rgba(255,80,200,ALPHA)", 42, 0.62, t, 29);
-        waveParticles(cx, cy, hole, sAng, "rgba(120,230,255,ALPHA)", 40, 0.3, t, 47);
+        waveParticles(cx, cy, hole, hAng, "rgba(255,220,120,ALPHA)", 20, 0.82, t, 11);
+        waveParticles(cx, cy, hole, mAng, "rgba(255,80,200,ALPHA)", 24, 0.62, t, 29);
+        waveParticles(cx, cy, hole, sAng, "rgba(120,230,255,ALPHA)", 22, 0.3, t, 47);
 
         beacon(cx, cy, hole, hAng, "rgba(255,210,110,0.95)", hole * 0.072, 1.62);
         beacon(cx, cy, hole, mAng, "rgba(255,90,210,0.95)", hole * 0.055, 1.72);
@@ -563,27 +561,24 @@ function initOrbitObservatory() {
         ellipse(cx, cy, hole * 1.1, hole * 1.1, 0, "rgba(255,79,200,0.48)", 2, 14);
         ellipse(cx, cy, hole * 1.09, hole * (0.45 + tilt * 0.35), rotation, "rgba(255,199,100,0.9)", 2.1, 18);
         ellipse(cx, cy, hole * 1.055, hole * (0.43 + tilt * 0.32), rotation, "rgba(121,231,255,0.75)", 1.1, 10);
-        ellipse(cx, cy, hole * 1.28, hole * (0.52 + tilt * 0.3), rotation, "rgba(140,255,160,0.12)", 1, 6);
 
         ctx.fillStyle = shadowGrad;
         ctx.beginPath();
         ctx.arc(cx, cy, hole, 0, TAU);
         ctx.fill();
 
+        // High-performance double-stroke photon ring (0ms shadowBlur cost)
+        ctx.strokeStyle = "rgba(121,231,255,0.25)";
+        ctx.lineWidth = 4.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, hole * 1.105, 0, TAU);
+        ctx.stroke();
+
         ctx.strokeStyle = photonGrad;
-        ctx.shadowColor = "#79e7ff";
-        ctx.shadowBlur = 22;
-        ctx.lineWidth = 2.4;
+        ctx.lineWidth = 1.8;
         ctx.beginPath();
         ctx.arc(cx, cy, hole * 1.105, 0, TAU);
         ctx.stroke();
-        ctx.shadowBlur = 10;
-        ctx.lineWidth = 1.1;
-        ctx.strokeStyle = "rgba(255,255,255,0.35)";
-        ctx.beginPath();
-        ctx.arc(cx, cy, hole * 1.105, 0, TAU);
-        ctx.stroke();
-        ctx.shadowBlur = 0;
     }
 
     function frame(t) {

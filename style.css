@@ -145,18 +145,16 @@ section {
     position: fixed;
     top: 2rem;
     left: 50%;
-    transform: translateX(-50%) translate3d(0, 0, 0); /* Added translate3d for GPU acceleration */
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
     max-width: 800px;
     padding: 1.25rem 2.5rem;
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 100px;
     z-index: 100;
@@ -186,9 +184,9 @@ section {
 }
 
 .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 32px;
     padding: 5rem;
