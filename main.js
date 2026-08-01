@@ -214,41 +214,7 @@ function initOrbitObservatory() {
         ctx.restore();
     }
 
-    function handSpoke(cx, cy, hole, angle, color, length, width) {
-        var yScale = 0.42 + Math.abs(Math.sin(pitch)) * 0.28;
-        var r0 = hole * 1.14;
-        var r1 = hole * length;
-        var x0 = cx + Math.cos(angle) * r0;
-        var y0 = cy + Math.sin(angle) * r0 * yScale;
-        var x1 = cx + Math.cos(angle) * r1;
-        var y1 = cy + Math.sin(angle) * r1 * yScale;
-        ctx.save();
-        ctx.lineCap = "round";
-        ctx.globalCompositeOperation = "source-over";
-        ctx.strokeStyle = "rgba(0,0,4,0.72)";
-        ctx.lineWidth = width * 2.4;
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.stroke();
-        ctx.globalCompositeOperation = "lighter";
-        ctx.shadowColor = color;
-        ctx.shadowBlur = width * 3.5;
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.stroke();
-        ctx.shadowBlur = width * 1.2;
-        ctx.strokeStyle = "rgba(255,255,255,0.85)";
-        ctx.lineWidth = Math.max(1, width * 0.28);
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.stroke();
-        ctx.restore();
-    }
+
 
     function beacon(cx, cy, hole, angle, color, size, orbitR) {
         var r = hole * (orbitR == null ? 1.55 : orbitR);
@@ -541,9 +507,6 @@ function initOrbitObservatory() {
         var hAng = hour + lensTurn;
         var mAng = minute + lensTurn;
         var sAng = second + lensTurn;
-
-        handSpoke(cx, cy, hole, hAng, "#ffe38a", 1.62, hole * 0.055);
-        handSpoke(cx, cy, hole, mAng, "#ff4fc8", 1.72, hole * 0.038);
 
         lensArc(cx, cy, hole, hAng, "#ffe38a", hole * 0.11, 0.82, 1, 1.15);
         lensArc(cx, cy, hole, mAng, "#ff4fc8", hole * 0.078, 0.62, 0.98, 1.05);
