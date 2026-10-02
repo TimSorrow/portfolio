@@ -1,7 +1,7 @@
 import { PRESETS, buildSystemPrompt } from './_presets.js';
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const MODEL = 'llama-3.3-70b-versatile';
+const MODEL = 'openai/gpt-oss-120b';
 const MAX_MESSAGES = 12;
 const MAX_CHARS = 500;
 const RATE_LIMIT = 20; // requests per IP per window, best effort per warm instance
@@ -82,7 +82,9 @@ export default async function handler(req, res) {
             body: JSON.stringify({
                 model: MODEL,
                 temperature: 0.3,
-                max_tokens: 350,
+                // gpt-oss is a reasoning model: keep reasoning short and leave room for the answer
+                reasoning_effort: 'low',
+                max_completion_tokens: 1024,
                 messages: [
                     { role: 'system', content: buildSystemPrompt(preset, lang) },
                     ...history,
