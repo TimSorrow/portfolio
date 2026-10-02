@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-scope>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="A 24/7 AI receptionist for salons, rentals and restaurants: answers customers, collects bookings, speaks their language. Try the live demo." data-i18n-attr="content:page.description">
+    <title data-i18n="page.title">AI Receptionist for Local Business — Timur Surov</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    </noscript>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        window.addEventListener('load', function () {
+            ['/_vercel/insights/script.js', '/_vercel/speed-insights/script.js'].forEach(function (src) {
+                var s = document.createElement('script');
+                s.src = src;
+                s.defer = true;
+                document.head.appendChild(s);
+            });
+        });
+    </script>
+</head>
+
+<body class="page-agents">
+
+    <div class="background-grid">
+        <div class="grid-line vertical">
+            <div class="line-pulse-y"></div>
+        </div>
+        <div class="grid-line horizontal">
+            <div class="line-pulse-x"></div>
+        </div>
+        <div class="grid-circle circle-1">
+            <div class="orbit-pulse"></div>
+        </div>
+        <div class="grid-circle circle-2">
+            <div class="orbit-pulse"></div>
+        </div>
+        <div class="grid-circle circle-3">
+            <div class="orbit-pulse"></div>
+        </div>
+    </div>
+
+    <nav class="glass-nav glass-nav--split">
+        <a href="/" class="logo" aria-label="Timur Surov — portfolio">T/S</a>
+        <ul class="nav-links">
+            <li><a href="/" data-i18n="nav.home">Portfolio</a></li>
+            <li><a href="#demo" data-i18n="nav.demo">Demo</a></li>
+            <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+            <li><a href="#pricing" data-i18n="nav.pricing">Packages</a></li>
+        </ul>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-hero">
+            <h2 class="subtitle" data-i18n="hero.label">AI Agents for Local Business</h2>
+            <h1 class="title" data-i18n="hero.title">Your AI receptionist</h1>
+            <p class="card-text page-hero-text" data-i18n="hero.text">Answers customer questions 24/7 using your prices, hours and rules — and turns chats into bookings you just confirm.</p>
+            <a href="#demo" class="cta-button" data-i18n="hero.cta">Try it live</a>
+        </section>
+
+        <section id="demo" class="demo-section">
+            <p class="section-label text-center" data-i18n="demo.label">01 // Live demo</p>
+            <h3 class="card-title text-center" data-i18n="demo.title">Ask what your customers ask</h3>
+
+            <div class="preset-tabs" role="tablist" aria-label="Demo business" data-i18n-attr="aria-label:demo.tabs">
+                <button type="button" class="preset-tab" role="tab" id="tab-salon" aria-controls="chat-panel" data-preset="salon" aria-selected="true" data-i18n="preset.salon">Beauty studio</button>
+                <button type="button" class="preset-tab" role="tab" id="tab-rental" aria-controls="chat-panel" data-preset="rental" aria-selected="false" tabindex="-1" data-i18n="preset.rental">Car rental</button>
+                <button type="button" class="preset-tab" role="tab" id="tab-restaurant" aria-controls="chat-panel" data-preset="restaurant" aria-selected="false" tabindex="-1" data-i18n="preset.restaurant">Restaurant</button>
+            </div>
+
+            <div class="glass-card chat" id="chat-panel" role="tabpanel" aria-busy="false">
+                <div class="chat-header">
+                    <span class="chat-status" aria-hidden="true"></span>
+                    <span class="chat-business">Lumière Nail &amp; Beauty Studio</span>
+                    <span class="chat-badge" data-i18n="chat.demo">Demo</span>
+                </div>
+
+                <div class="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+                <div class="chat-suggestions" role="group" aria-label="Suggested questions" data-i18n-attr="aria-label:chat.suggestions"></div>
+
+                <form class="chat-form" autocomplete="off">
+                    <label for="chat-input" class="sr-only" data-i18n="chat.input">Your message</label>
+                    <input id="chat-input" class="chat-input" type="text" maxlength="500" placeholder="Type a question…" data-i18n-attr="placeholder:chat.placeholder">
+                    <button type="submit" class="chat-send" aria-label="Send" data-i18n-attr="aria-label:chat.send" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
+
+                <p class="chat-note" data-i18n="chat.note">Fictional businesses for demonstration. Please don't share real personal data.</p>
+            </div>
+        </section>
+
+        <section id="how" class="how-section">
+            <p class="section-label text-center" data-i18n="how.label">02 // How it works</p>
+            <h3 class="card-title text-center" data-i18n="how.title">Live in about a week</h3>
+            <div class="stack-grid">
+                <div class="glass-card stack-card step-card">
+                    <span class="step-num">01</span>
+                    <h4 data-i18n="how.s1.title">Your knowledge</h4>
+                    <p class="card-text" data-i18n="how.s1.text">You send prices, hours, rules and the questions customers ask most.</p>
+                </div>
+                <div class="glass-card stack-card step-card">
+                    <span class="step-num">02</span>
+                    <h4 data-i18n="how.s2.title">Your agent</h4>
+                    <p class="card-text" data-i18n="how.s2.text">I set up and test the agent on real scenarios, in your tone and languages.</p>
+                </div>
+                <div class="glass-card stack-card step-card">
+                    <span class="step-num">03</span>
+                    <h4 data-i18n="how.s3.title">Your channels</h4>
+                    <p class="card-text" data-i18n="how.s3.text">It goes live on your website, Telegram or WhatsApp; bookings come straight to you.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing-section">
+            <p class="section-label text-center" data-i18n="pricing.label">03 // Packages</p>
+            <h3 class="card-title text-center" data-i18n="pricing.title">Pick a starting point</h3>
+            <!-- TODO(Timur): replace "pricing.price" with real prices in i18n.js -->
+            <div class="stack-grid pricing-grid">
+                <div class="glass-card stack-card price-card">
+                    <h4 data-i18n="pricing.p1.name">Start</h4>
+                    <p class="price" data-i18n="pricing.price">On request</p>
+                    <ul>
+                        <li data-i18n="pricing.p1.f1">FAQ agent on your website</li>
+                        <li data-i18n="pricing.p1.f2">Up to 2 languages</li>
+                        <li data-i18n="pricing.p1.f3">Setup in a few days</li>
+                    </ul>
+                </div>
+                <div class="glass-card stack-card price-card price-card--featured">
+                    <span class="price-badge" data-i18n="pricing.popular">Popular</span>
+                    <h4 data-i18n="pricing.p2.name">Business</h4>
+                    <p class="price" data-i18n="pricing.price">On request</p>
+                    <ul>
+                        <li data-i18n="pricing.p2.f1">Website + Telegram or WhatsApp</li>
+                        <li data-i18n="pricing.p2.f2">Bookings sent to you instantly</li>
+                        <li data-i18n="pricing.p2.f3">Monthly tuning on real chats</li>
+                    </ul>
+                </div>
+                <div class="glass-card stack-card price-card">
+                    <h4 data-i18n="pricing.p3.name">Custom</h4>
+                    <p class="price" data-i18n="pricing.price">On request</p>
+                    <ul>
+                        <li data-i18n="pricing.p3.f1">CRM or booking system integration</li>
+                        <li data-i18n="pricing.p3.f2">Several agents and channels</li>
+                        <li data-i18n="pricing.p3.f3">Priority support</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="glass-card contact-card text-center">
+                <p class="section-label" data-i18n="contact.label">04 // Contact</p>
+                <h3 class="card-title" data-i18n="contact.title">Let's set up your agent</h3>
+                <p class="card-text" data-i18n="contact.text">Tell me about your business — I will show you a demo built on your own prices.</p>
+                <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="cta-button" data-i18n="contact.cta">Message on Telegram</a>
+
+                <div class="social-links">
+                    <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                    </a>
+                    <a href="mailto:timursurov@gmail.com" class="social-icon-link" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/timursurov/?locale=en" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./agents.js"></script>
+</body>
+
+</html>

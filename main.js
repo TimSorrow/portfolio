@@ -1,3 +1,8 @@
+import { initI18n } from './i18n.js';
+
+// RU/EN switch for the AI agents section
+initI18n();
+
 // Event Horizon Orbit Observatory Canvas Engine
 function initOrbitObservatory() {
     var canvas = document.getElementById("orbit");
