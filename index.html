@@ -5,10 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
-    <meta name="description" content="Timur Surov — AI Engineer & Creative Developer. Building intelligent systems and immersive digital experiences.">
+    <meta name="description" content="Timur Surov — AI Engineer & Creative Developer. Building intelligent systems and immersive digital experiences." data-i18n-attr="content:home.page.description">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Timur Surov — AI Engineer & Creative Developer</title>
+    <title data-i18n="home.page.title">Timur Surov — AI Engineer & Creative Developer</title>
+
+    <!-- Pick the language before first paint (?lang= → saved → browser → en); i18n.js does the rest -->
+    <script>
+        (function () {
+            var L = ['en', 'es', 'ru'], l, d = document.documentElement;
+            try { l = new URLSearchParams(location.search).get('lang'); if (L.indexOf(l) < 0) l = localStorage.getItem('ts-lang'); } catch (e) {}
+            if (L.indexOf(l) < 0) { l = (navigator.language || '').slice(0, 2).toLowerCase(); if (L.indexOf(l) < 0) l = 'en'; }
+            d.lang = l;
+            if (l !== 'en') { d.classList.add('i18n-pending'); setTimeout(function () { d.classList.remove('i18n-pending'); }, 1500); }
+        })();
+    </script>
+    <style>.i18n-pending body { visibility: hidden; }</style>
 
     <!-- DNS prefetch + preconnect for Google Fonts -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -61,34 +73,39 @@
         </div>
     </div>
 
-    <nav class="glass-nav">
+    <nav class="glass-nav glass-nav--split">
         <div class="logo">T/S</div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#agents">Agents</a></li>
-            <li><a href="#stack">Tech Stack</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about" data-i18n="home.nav.about">About</a></li>
+            <li><a href="#projects" data-i18n="home.nav.projects">Projects</a></li>
+            <li><a href="#agents" data-i18n="home.nav.agents">Agents</a></li>
+            <li><a href="#stack" data-i18n="home.nav.stack">Tech Stack</a></li>
+            <li><a href="#contact" data-i18n="home.nav.contact">Contact</a></li>
         </ul>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
+            <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="es" lang="es" aria-pressed="false">ES</button>
+            <button type="button" data-lang="ru" lang="ru" aria-pressed="false">RU</button>
+        </div>
     </nav>
 
     <main>
         <section class="hero">
             <canvas id="orbit" tabindex="0" role="img" aria-label="Event Horizon Orbit"></canvas>
             <div class="hero-content">
-                <h2 class="subtitle">AI Engineer & Creative Developer</h2>
+                <h2 class="subtitle" data-i18n="home.hero.subtitle">AI Engineer & Creative Developer</h2>
                 <h1 class="title">TIMUR SUROV</h1>
-                <p class="hero-description">The material has to be created</p>
-                <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="cta-button hero-cta">Contact me</a>
+                <p class="hero-description" data-i18n="home.hero.tagline">The material has to be created</p>
+                <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="cta-button hero-cta" data-i18n="home.hero.cta">Contact me</a>
             </div>
             <p id="status" class="sr-only" aria-live="polite">Event Horizon Orbit</p>
         </section>
 
         <section id="about" class="about-section">
             <div class="glass-card about-card">
-                <p class="section-label">01 // About</p>
-                <h3 class="card-title">Architecting Systems</h3>
-                <p class="card-text">
+                <p class="section-label" data-i18n="home.about.label">01 // About</p>
+                <h3 class="card-title" data-i18n="home.about.title">Architecting Systems</h3>
+                <p class="card-text" data-i18n-html="home.about.text">
                     I specialize in designing and implementing high-performance AI systems, vector search architectures,
                     and scalable backends. With an academic background in <strong>Economics & Business IT (MGIMO University)</strong>
                     and 7+ years of engineering experience, I bridge the gap between technical reliability, low latency, and 
@@ -99,23 +116,17 @@
 
         <section id="projects" class="projects-section">
             <div class="glass-card project-card">
-                <p class="section-label">02 // Selected Work</p>
+                <p class="section-label" data-i18n="home.projects.label">02 // Selected Work</p>
                 
                 <div class="project-slider">
                     <div class="project-slides">
                         <!-- Project 1: Semantic Caching Layer -->
                         <div class="project-slide active" data-index="0">
                             <div class="project-header">
-                                <h3 class="card-title">Semantic Caching Layer</h3>
-                                <a href="https://semantic-cache-api-74171843573.us-central1.run.app/" target="_blank" class="project-link">
-                                    Live Demo ↗
-                                </a>
+                                <h3 class="card-title" data-i18n="home.p1.title">Semantic Caching Layer</h3>
+                                <a href="https://semantic-cache-api-74171843573.us-central1.run.app/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="home.projects.demo">Live Demo ↗</a>
                             </div>
-                            <p class="card-text project-desc">
-                                An advanced semantic caching layer designed for LLMs, featuring vector similarity search 
-                                with Redis HNSW index and real-time visualization of query pipeline execution. Reduces latency 
-                                and API costs by matching semantically equivalent queries using embeddings.
-                            </p>
+                            <p class="card-text project-desc" data-i18n="home.p1.desc">An advanced semantic caching layer designed for LLMs, featuring vector similarity search with Redis HNSW index and real-time visualization of query pipeline execution. Reduces latency and API costs by matching semantically equivalent queries using embeddings.</p>
                             <div class="project-tech-tags">
                                 <span class="tech-tag">Redis VSS</span>
                                 <span class="tech-tag">Vector Embeddings</span>
@@ -128,16 +139,10 @@
                         <!-- Project 2: Text-to-SQL with Guardrails MVP -->
                         <div class="project-slide" data-index="1">
                             <div class="project-header">
-                                <h3 class="card-title">Text-to-SQL with Guardrails</h3>
-                                <a href="https://github.com/TimSorrow/Text-to-SQL-with-Guardrails-MVP" target="_blank" class="project-link">
-                                    GitHub Repo ↗
-                                </a>
+                                <h3 class="card-title" data-i18n="home.p2.title">Text-to-SQL with Guardrails</h3>
+                                <a href="https://github.com/TimSorrow/Text-to-SQL-with-Guardrails-MVP" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="home.projects.repo">GitHub Repo ↗</a>
                             </div>
-                            <p class="card-text project-desc">
-                                A robust MVP translating natural language queries to secure SQL. Implements comprehensive 
-                                safety guardrails to prevent SQL injection, restrict unauthorized schema access, and validate 
-                                generated queries before execution, bridging the gap between natural language interfaces and database security.
-                            </p>
+                            <p class="card-text project-desc" data-i18n="home.p2.desc">A robust MVP translating natural language queries to secure SQL. Implements comprehensive safety guardrails to prevent SQL injection, restrict unauthorized schema access, and validate generated queries before execution, bridging the gap between natural language interfaces and database security.</p>
                             <div class="project-tech-tags">
                                 <span class="tech-tag">Text-to-SQL</span>
                                 <span class="tech-tag">Guardrails</span>
@@ -150,16 +155,10 @@
                         <!-- Project 3: Documentation Web Crawler -->
                         <div class="project-slide" data-index="2">
                             <div class="project-header">
-                                <h3 class="card-title">Documentation Web Crawler</h3>
-                                <a href="https://github.com/TimSorrow/Documentation-Web-Crawler" target="_blank" class="project-link">
-                                    GitHub Repo ↗
-                                </a>
+                                <h3 class="card-title" data-i18n="home.p3.title">Documentation Web Crawler</h3>
+                                <a href="https://github.com/TimSorrow/Documentation-Web-Crawler" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="home.projects.repo">GitHub Repo ↗</a>
                             </div>
-                            <p class="card-text project-desc">
-                                A high-performance, multi-threaded web crawler designed to scrape and compile complex technical documentation. 
-                                Automatically manages rate limits, parses page hierarchies, and outputs clean formats (like Markdown or JSON) 
-                                optimized for RAG pipelines and LLM training.
-                            </p>
+                            <p class="card-text project-desc" data-i18n="home.p3.desc">A high-performance, multi-threaded web crawler designed to scrape and compile complex technical documentation. Automatically manages rate limits, parses page hierarchies, and outputs clean formats (like Markdown or JSON) optimized for RAG pipelines and LLM training.</p>
                             <div class="project-tech-tags">
                                 <span class="tech-tag">Web Scraper</span>
                                 <span class="tech-tag">Documentation</span>
@@ -172,16 +171,10 @@
                         <!-- Project 4: Sequence & Risk ML Portfolio -->
                         <div class="project-slide" data-index="3">
                             <div class="project-header">
-                                <h3 class="card-title">Sequence & Risk ML</h3>
-                                <a href="https://github.com/TimSorrow/ai-machine-projects" target="_blank" class="project-link">
-                                    GitHub Repo ↗
-                                </a>
+                                <h3 class="card-title" data-i18n="home.p4.title">Sequence & Risk ML</h3>
+                                <a href="https://github.com/TimSorrow/ai-machine-projects" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="home.projects.repo">GitHub Repo ↗</a>
                             </div>
-                            <p class="card-text project-desc">
-                                A collection of deep learning architectures in PyTorch for financial data: Contrastive Sequence Pre-training (CoLES) 
-                                on transaction streams, SASRec event Transformers for LTV forecasting, and a Multimodal Risk Fusion model 
-                                combining event sequences, tabular data, and merchant graphs for fraud detection.
-                            </p>
+                            <p class="card-text project-desc" data-i18n="home.p4.desc">A collection of deep learning architectures in PyTorch for financial data: Contrastive Sequence Pre-training (CoLES) on transaction streams, SASRec event Transformers for LTV forecasting, and a Multimodal Risk Fusion model combining event sequences, tabular data, and merchant graphs for fraud detection.</p>
                             <div class="project-tech-tags">
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">Sequence Modeling</span>
@@ -194,7 +187,7 @@
                     
                     <!-- Slider Navigation Controls -->
                     <div class="slider-controls">
-                        <button class="slider-arrow prev" aria-label="Previous Project">
+                        <button class="slider-arrow prev" aria-label="Previous project" data-i18n-attr="aria-label:home.projects.prev">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                         </button>
                         <div class="slider-dots">
@@ -203,7 +196,7 @@
                             <span class="slider-dot" data-index="2"></span>
                             <span class="slider-dot" data-index="3"></span>
                         </div>
-                        <button class="slider-arrow next" aria-label="Next Project">
+                        <button class="slider-arrow next" aria-label="Next project" data-i18n-attr="aria-label:home.projects.next">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
@@ -211,15 +204,9 @@
             </div>
         </section>
 
-        <section id="agents" class="agents-section" data-i18n-scope>
+        <section id="agents" class="agents-section">
             <div class="glass-card agents-card">
-                <div class="agents-card-head">
-                    <p class="section-label" data-i18n="teaser.label">03 // AI Agents for Business</p>
-                    <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.aria">
-                        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-                        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
-                    </div>
-                </div>
+                <p class="section-label" data-i18n="teaser.label">03 // AI Agents for Business</p>
                 <div class="agents-teaser">
                     <div>
                         <h3 class="card-title" data-i18n="teaser.title">An AI receptionist that never sleeps</h3>
@@ -246,30 +233,30 @@
         </section>
 
         <section id="stack" class="stack-section">
-            <p class="section-label text-center">04 // Tech Stack</p>
+            <p class="section-label text-center" data-i18n="home.stack.label">04 // Tech Stack</p>
             <div class="stack-grid">
                 <div class="glass-card stack-card">
-                    <h4>Machine Learning</h4>
+                    <h4 data-i18n="home.stack.ml">Machine Learning</h4>
                     <ul>
                         <li>TensorFlow</li>
                         <li>PyTorch</li>
-                        <li>LLMs & NLP</li>
+                        <li data-i18n="home.stack.llm">LLMs & NLP</li>
                     </ul>
                 </div>
                 <div class="glass-card stack-card">
-                    <h4>Creative Dev</h4>
+                    <h4 data-i18n="home.stack.creative">Creative Dev</h4>
                     <ul>
                         <li>Three.js</li>
                         <li>WebGL</li>
-                        <li>Creative Coding</li>
+                        <li data-i18n="home.stack.coding">Creative Coding</li>
                     </ul>
                 </div>
                 <div class="glass-card stack-card">
-                    <h4>Engineering</h4>
+                    <h4 data-i18n="home.stack.eng">Engineering</h4>
                     <ul>
                         <li>Python</li>
                         <li>TypeScript</li>
-                        <li>Cloud Architecture</li>
+                        <li data-i18n="home.stack.cloud">Cloud Architecture</li>
                     </ul>
                 </div>
             </div>
@@ -277,9 +264,9 @@
 
         <section id="contact" class="contact-section">
             <div class="glass-card contact-card text-center">
-                <p class="section-label">05 // Contact</p>
-                <h3 class="card-title">Let's build together</h3>
-                <a href="mailto:timursurov@gmail.com" class="cta-button">Initiate Connection</a>
+                <p class="section-label" data-i18n="home.contact.label">05 // Contact</p>
+                <h3 class="card-title" data-i18n="home.contact.title">Let's build together</h3>
+                <a href="mailto:timursurov@gmail.com" class="cta-button" data-i18n="home.contact.cta">Initiate Connection</a>
                 
                 <div class="social-links">
                     <a href="https://github.com/TimSorrow" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="GitHub">
