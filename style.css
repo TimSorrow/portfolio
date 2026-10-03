@@ -702,6 +702,29 @@ section {
    AI Agents — section on the home page and the /agents page
    ========================================================================== */
 
+/* Nav with links + language switch */
+.glass-nav--split {
+    max-width: 960px;
+    gap: 1.5rem;
+}
+
+.glass-nav--split .nav-links {
+    gap: 2.25rem;
+}
+
+.glass-nav--split .nav-links a {
+    white-space: nowrap;
+}
+
+@media (max-width: 1000px) and (min-width: 769px) {
+    .glass-nav--split .nav-links {
+        gap: 1.5rem;
+    }
+    .glass-nav--split {
+        padding: 1.25rem 1.75rem;
+    }
+}
+
 /* Language switch (segmented pill) */
 .lang-switch {
     display: inline-flex;
@@ -750,19 +773,6 @@ section {
 .agents-card {
     width: 100%;
     max-width: 1100px;
-}
-
-.agents-card-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.agents-card-head .section-label {
-    margin-bottom: 0;
 }
 
 .agents-teaser {

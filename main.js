@@ -21,7 +21,6 @@ function initOrbitObservatory() {
     var reduced = motion.matches;
     var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
     var TARGET_FPS = isMobile ? 30 : 60;
-    var FRAME_MS = 1000 / TARGET_FPS;
     var lastFrameTime = 0;
     var W = 1, H = 1, DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2), raf = 0;
     var cx, cy, unit, hole;
@@ -549,15 +548,37 @@ function initOrbitObservatory() {
         ctx.stroke();
     }
 
+    // The orbit is a fixed background, so it keeps moving while the page scrolls.
+    // Behind the content it drops to an ambient frame rate, and on slow devices
+    // the frame rate steps down further when drawing eats too much of the budget.
+    var AMBIENT_FPS = isMobile ? 20 : 30;
+    var MIN_FPS = isMobile ? 15 : 24;
+    var fpsCap = TARGET_FPS;
+    var drawCost = 0;
+
+    function currentFrameMs() {
+        return 1000 / Math.min(fpsCap, heroVisible ? TARGET_FPS : AMBIENT_FPS);
+    }
+
     function frame(t) {
         raf = requestAnimationFrame(frame);
-        // Throttle to TARGET_FPS to free main thread for interactions (INP fix)
-        if (t - lastFrameTime < FRAME_MS) return;
+        // Throttle to free the main thread for scrolling and interactions (INP fix)
+        if (t - lastFrameTime < currentFrameMs() - 1) return;
+        // Keep rotation speed independent of the frame rate
+        var steps = lastFrameTime ? Math.min((t - lastFrameTime) / (1000 / 60), 4) : 1;
         lastFrameTime = t;
-        if (auto) targetYaw += 0.0012;
-        yaw += (targetYaw - yaw) * 0.09;
-        pitch += (targetPitch - pitch) * 0.09;
+        if (auto) targetYaw += 0.0012 * steps;
+        var ease = 1 - Math.pow(1 - 0.09, steps);
+        yaw += (targetYaw - yaw) * ease;
+        pitch += (targetPitch - pitch) * ease;
+
+        var start = performance.now();
         draw(t);
+        drawCost = drawCost * 0.9 + (performance.now() - start) * 0.1;
+        if (drawCost > currentFrameMs() * 0.5 && fpsCap > MIN_FPS) {
+            fpsCap = Math.max(MIN_FPS, Math.round(fpsCap * 0.75));
+            drawCost = 0;
+        }
     }
 
     var heroSection = document.querySelector(".hero");
@@ -566,12 +587,6 @@ function initOrbitObservatory() {
     if (heroSection && window.IntersectionObserver) {
         var observer = new IntersectionObserver(function (entries) {
             heroVisible = entries[0].isIntersecting;
-            if (heroVisible && animStarted) {
-                startRender();
-            } else {
-                cancelAnimationFrame(raf);
-                raf = 0;
-            }
         }, { threshold: 0.02 });
         observer.observe(heroSection);
     }
@@ -579,17 +594,40 @@ function initOrbitObservatory() {
     function startRender() {
         cancelAnimationFrame(raf);
         raf = 0;
-        if (!document.hidden && !reduced && heroVisible) raf = requestAnimationFrame(frame);
+        lastFrameTime = 0;
+        if (!document.hidden && !reduced) raf = requestAnimationFrame(frame);
         else draw(performance.now());
     }
+
+    document.addEventListener("visibilitychange", function () {
+        if (!animStarted) return;
+        if (document.hidden) {
+            cancelAnimationFrame(raf);
+            raf = 0;
+        } else {
+            startRender();
+        }
+    });
 
     resize();
     draw(performance.now());
 
+    // Re-fit the canvas on real viewport changes. Small height changes come from the
+    // mobile address bar showing/hiding while scrolling — ignore them to avoid jank.
+    var resizeTimer = 0;
+    window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            if (window.innerWidth === W && Math.abs(window.innerHeight - H) < 120) return;
+            resize();
+            if (!raf) draw(performance.now());
+        }, 150);
+    }, { passive: true });
+
     function triggerAnimation() {
         if (animStarted) return;
         animStarted = true;
-        if (heroVisible) startRender();
+        startRender();
     }
 
     window.addEventListener("pointermove", triggerAnimation, { passive: true, once: true });

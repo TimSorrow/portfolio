@@ -70,7 +70,7 @@ Languages spoken: English, Russian, Spanish.`,
 };
 
 export function buildSystemPrompt(preset, lang) {
-    const fallbackLang = lang === 'ru' ? 'Russian' : 'English';
+    const fallbackLang = { ru: 'Russian', es: 'Spanish' }[lang] || 'English';
     return `You are the virtual receptionist of "${preset.name}". You chat with customers on the business website.
 
 FACTS (your only source of truth):
