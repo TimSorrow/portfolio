@@ -1,4 +1,5 @@
 import { initI18n, onLangChange, getLang, t } from './i18n.js';
+import { initAsciiField } from './ascii-field.js';
 
 const PRESET_NAMES = {
     salon: 'Lumière Nail & Beauty Studio',
@@ -222,6 +223,10 @@ async function send(text, fromInput = false) {
 }
 
 initI18n();
+
+const startField = () => initAsciiField(document.getElementById('field'), { stones: ['faq', 'booking', 'leads'], seed: 13 });
+if (typeof requestIdleCallback === 'function') requestIdleCallback(startField, { timeout: 1200 });
+else setTimeout(startField, 200);
 
 if (chat) {
     indicator = document.createElement('span');
