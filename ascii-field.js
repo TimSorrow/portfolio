@@ -14,7 +14,7 @@ const COLORS = {
     bank: '#8c8778',
     river: '#7fa2b6',
     leaf: '#6e9862',
-    bloom: '#e8b39a',
+    bloom: '#4fd1c5',
 };
 const COLOR_KEYS = Object.keys(COLORS);
 const BG = '#0b0b0b';
