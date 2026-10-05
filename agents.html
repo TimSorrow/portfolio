@@ -22,9 +22,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     </noscript>
 
     <link rel="stylesheet" href="./style.css">
@@ -45,23 +45,7 @@
 
 <body class="page-agents">
 
-    <div class="background-grid">
-        <div class="grid-line vertical">
-            <div class="line-pulse-y"></div>
-        </div>
-        <div class="grid-line horizontal">
-            <div class="line-pulse-x"></div>
-        </div>
-        <div class="grid-circle circle-1">
-            <div class="orbit-pulse"></div>
-        </div>
-        <div class="grid-circle circle-2">
-            <div class="orbit-pulse"></div>
-        </div>
-        <div class="grid-circle circle-3">
-            <div class="orbit-pulse"></div>
-        </div>
-    </div>
+    <canvas id="field" aria-hidden="true"></canvas>
 
     <nav class="glass-nav glass-nav--split">
         <a href="/" class="logo" aria-label="Timur Surov — portfolio">T/S</a>

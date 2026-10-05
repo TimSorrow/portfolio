@@ -30,9 +30,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     </noscript>
 
     <!-- Primary Stylesheet (Inlined by Vite on build) -->
@@ -55,23 +55,7 @@
 
 <body>
     
-    <div class="background-grid">
-        <div class="grid-line vertical">
-            <div class="line-pulse-y"></div>
-        </div>
-        <div class="grid-line horizontal">
-            <div class="line-pulse-x"></div>
-        </div>
-        <div class="grid-circle circle-1">
-            <div class="orbit-pulse"></div>
-        </div>
-        <div class="grid-circle circle-2">
-            <div class="orbit-pulse"></div>
-        </div>
-        <div class="grid-circle circle-3">
-            <div class="orbit-pulse"></div>
-        </div>
-    </div>
+    <canvas id="field" aria-hidden="true"></canvas>
 
     <nav class="glass-nav glass-nav--split">
         <div class="logo">T/S</div>
@@ -91,14 +75,12 @@
 
     <main>
         <section class="hero">
-            <canvas id="orbit" tabindex="0" role="img" aria-label="Event Horizon Orbit"></canvas>
             <div class="hero-content">
                 <h2 class="subtitle" data-i18n="home.hero.subtitle">AI Engineer & Creative Developer</h2>
                 <h1 class="title">TIMUR SUROV</h1>
                 <p class="hero-description" data-i18n="home.hero.tagline">The material has to be created</p>
                 <a href="https://t.me/timsorrow" target="_blank" rel="noopener noreferrer" class="cta-button hero-cta" data-i18n="home.hero.cta">Contact me</a>
             </div>
-            <p id="status" class="sr-only" aria-live="polite">Event Horizon Orbit</p>
         </section>
 
         <section id="about" class="about-section">
